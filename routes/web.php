@@ -14,3 +14,5 @@
 Route::get('/','Index@Index');
 
 Route::post('submit', 'Index@SalvarXml');
+
+Route::post('Derivar', 'Index@Derivacao');
