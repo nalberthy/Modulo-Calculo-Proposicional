@@ -29,17 +29,35 @@ class Index extends Controller
 
             $xml = simplexml_load_file($request->file('arquivo'));
 
-            $derivacao =  $this->arg->arrayDerivacao($xml);
+            $premissas = $this->arg->arrayPremissas($xml);
+            $conclusao = $this->arg->arrayConclusao($xml);
+            $derivacao =  $this->arg->arrayDerivacao($premissas);
+            
+            
 
-            print_r($this->arg->stringFormula($xml));
+            $indice=1;
+            foreach ($derivacao as $i) {
+                $i->setIndice($indice);
+                if (in_array($i->getPremissa(), $premissas, true)){
+                    $i->setIdentificacao('p');
+                }
+                else{
+                    $i->setIdentificacao('setar aplicação');
+                }
+                print_r($i->getIndice().'&nbsp &nbsp &nbsp &nbsp'.$this->arg->stringArg($i->getPremissa()->getValor_obj()).'&nbsp &nbsp &nbsp &nbsp'.$i->getIdentificacao()."<br><br>");
+                $indice+=1;
+            }
 
             return $this->Index();
         }
     }
 
     public function Derivacao(Request $request){
+ 
 
 
+
+        
 
         # Busca XML no diretorio
         return view('derivacao');
@@ -47,6 +65,8 @@ class Index extends Controller
     }
 
     public function Regras(){
+
+        
 
     }
 

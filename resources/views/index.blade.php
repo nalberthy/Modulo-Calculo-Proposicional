@@ -11,15 +11,13 @@
                         <form method="post" action="{{URL::to('/submit')}}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupFileAddon01">Enviar</span>
-                                </div>
+                            <button type="submit" class="btn btn-outline-dark">Enviar</button>
                                     <div class="custom-file">
                                     <input type="file" name = "arquivo"  accept=".xml" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
                                     <label class="custom-file-label" for="inputGroupFile01">Arquivo XML</label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-outline-dark">Enviar</button>
+                           
                     </form>
 
                 </div>
@@ -41,7 +39,6 @@
                     <div class="card-body">
                         <form method="post" action="{{URL::to('/Derivar')}}">
                         {{ csrf_field() }}
-
                             <div class="row">
                                 <div class="col-6">
                                     <div class="custom-control custom-radio">
@@ -88,7 +85,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-outline-dark">Enviar</button>
+                            <button type="submit" class="btn btn-outline-dark">Aplicar</button>
 
                         </form>
 

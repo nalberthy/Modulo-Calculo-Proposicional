@@ -230,20 +230,18 @@ class Argumento extends Controller
     }
 
 
-   public function arrayDerivacao($xml){
+    public function arrayDerivacao($premissas){
         $arg = new Argumento;
         $arrayDerivacao=[];
-        $premissas = $this->arrayPremissas($xml);
         foreach ($premissas as $premissa){
             array_push($arrayDerivacao, $arg->derivacao($premissa));
         }
         return $arrayDerivacao;
         }
 
-   public function arrayPremissas($xml){
+    public function arrayPremissas($xml){
         $arg = new Argumento;
         $arrayPremissas=[];
-
         foreach ($xml as $filhos){
             if ($filhos->getName()=='PREMISSA'){
                 array_push($arrayPremissas, $arg->premissa($filhos));
@@ -252,7 +250,7 @@ class Argumento extends Controller
         return $arrayPremissas;
     }
 
-   public function arrayConclusao($xml){
+    public function arrayConclusao($xml){
         $arg = new Argumento;
         $arrayConclusao=[];
         foreach ($xml as $filhos){
@@ -264,9 +262,8 @@ class Argumento extends Controller
     }
 
 
-   public function stringFormula($argumento){
-        // print_r($argumento);
-        // echo '<br>.<br>';
+    public function stringArg($argumento){
+
         if (in_array($argumento->getTipo(), ['CONJUNCAO','BICONDICIONAL','CONDICIONAL', 'DISJUNCAO'])){
             $negacao='';
             $string=null;
@@ -277,16 +274,16 @@ class Argumento extends Controller
             }
             switch ($argumento->getTipo()) {
                 case 'CONJUNCAO':
-                    $string = $negacao.'('.stringArg($argumento->getEsquerda()).' ^ '.stringArg($argumento->getDireita()).')';
+                    $string = $negacao.'('.$this->stringArg($argumento->getEsquerda()).' ^ '.$this->stringArg($argumento->getDireita()).')';
                     break;
                 case 'BICONDICIONAL':
-                    $string = $negacao.'('.stringArg($argumento->getEsquerda()).' ↔ '.stringArg($argumento->getDireita()).')';
+                    $string = $negacao.'('.$this->stringArg($argumento->getEsquerda()).' ↔ '.$this->stringArg($argumento->getDireita()).')';
                     break;
                 case 'CONDICIONAL':
-                    $string = $negacao.'('.stringArg($argumento->getEsquerda()).' → '.stringArg($argumento->getDireita()).')';
+                    $string = $negacao.'('.$this->stringArg($argumento->getEsquerda()).' → '.$this->stringArg($argumento->getDireita()).')';
                     break;
                 case 'DISJUNCAO':
-                    $string =$negacao.'('.stringArg($argumento->getEsquerda()).' v '.stringArg($argumento->getDireita()).')';
+                    $string =$negacao.'('.$this->stringArg($argumento->getEsquerda()).' v '.$this->stringArg($argumento->getDireita()).')';
                     break;
             }
             return $string;
@@ -302,13 +299,10 @@ class Argumento extends Controller
             return $string;
         }
     }
-
 }
 
 
 
 
-
-// Geração de arrays
 
 

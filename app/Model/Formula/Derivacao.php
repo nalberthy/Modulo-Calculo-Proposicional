@@ -13,7 +13,7 @@ class Derivacao extends Model
     function __construct($indice,$premissa,$identificacao) {
         $this->indice=$indice;
         $this->premissa=$premissa;
-        $this ->identificacao=$identificacao;
+        $this->identificacao=$identificacao;
     } 
 
     public function getIndice(){
@@ -34,7 +34,7 @@ class Derivacao extends Model
     }
 
     public function getIdentificacao(){
-        $this->identificacao;
+        return $this->identificacao;
     }
     
     public function setIdentificacao($identificacao){
