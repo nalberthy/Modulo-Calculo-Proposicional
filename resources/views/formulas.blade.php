@@ -1,30 +1,7 @@
 @extends('index')
 
-
-@section('formula')
-<p class="text-center">{{$formula}}</p>
-@endsection
-
-@section('derivacao')
-
-
-
-<table class="table table-bordered">
-    <tbody>
-        @foreach($derivacoes as $derivacao)
-        <tr>
-            <th class="text-center align-middle m-0" scope="row">{{$derivacao['indice']}}</th>
-            <td class="text-center align-middle" width="60%">{{$derivacao['str']}}</td>
-            <td class="text-center align-middle "> {{$derivacao['ident']}}</td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-
-
-@endsection
-
 @section('formulas')
+
 
 <table class="table table-bordered">
     <tbody>

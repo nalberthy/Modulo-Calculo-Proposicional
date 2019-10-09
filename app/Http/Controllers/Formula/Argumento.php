@@ -209,7 +209,7 @@ class Argumento extends Controller
     public function derivacao($premissa){
             return new Derivacao(null,$premissa,null);
     }
-    public function newpremissa($predicado){
+    public function criarpremissa($predicado){
         return new Premissa($predicado->getValor(), $predicado);
     }
     public function newconjuncao($predicado1,$predicado2){
@@ -298,6 +298,22 @@ class Argumento extends Controller
             $string= $negacao.' '.$argumento->getValor();
             return $string;
         }
+    }
+
+    public function formula($premissas,$conclusao){
+        $strFomula='';
+        $strpremissa = '';
+        $strconclusao= '';
+        for ($i=0; $i < count($premissas); $i++){
+            if($i<count($premissas)-1){
+                $strpremissa=$strpremissa.$this->stringArg($premissas[$i]->getValor_obj()).' ,';
+            }
+            else{$strpremissa=$strpremissa.$this->stringArg($premissas[$i]->getValor_obj()).' '; }
+        }
+        
+        $strconclusao=$strconclusao.$this->stringArg($conclusao[0]->getValor_obj());
+        $strFomula=$strFomula.$strpremissa.'|-'.$strconclusao;
+        return $strFomula;
     }
 }
 

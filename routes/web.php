@@ -15,4 +15,9 @@ Route::get('/','Index@Index');
 
 Route::post('submit', 'Index@SalvarXml');
 
-Route::post('Derivar', 'Index@Derivacao');
+Route::post('Derivar', 'Index@Derivar');
+Route::post('Derivacao', 'Index@Derivacao');
+
+
+
+// [, 'derivacoes'=>"{ 'regra': 'condicional' 'linha':'1'} {regra'=>'duplanegacao', 'linha'=>'2}"]
