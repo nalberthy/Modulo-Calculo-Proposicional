@@ -31,6 +31,14 @@ class Regras extends Controller
                 }
             }
         }
-        
     }
+
+    public function IntroducaoDisjuncao($derivacao,$premissa1,$premissa2){
+        $newpremissa1 = clone $premissa1->getPremissa()->getValor_obj();
+        $newpremissa2 = clone $premissa2->getPremissa()->getValor_obj();
+
+        return $this->arg->derivacao($this->arg->criarpremissa($this->arg->criardisjuncao($newpremissa1,$newpremissa2)));
+    }
+
+
 }

@@ -85,16 +85,22 @@ class Index extends Controller
         $listaDerivacoes=json_decode($listaDerivacoes,true);
         #-------------------------------------
         
-        #-------- Reconstrói primeira etapa de derivação---------
+        #-------- Reconstrói primeira etapa de derivação visual---------
         $derivacoes=$this->constr->gerar($derivacao,$premissas);
         #--------------------------------------------------------
+        #-------- Reconstró passo a passo -----------------------
+        $derivacaoPasso= $this->constr->gerarPasso($derivacao,$listaDerivacoes);
         
-        // print_r($formulario['linha1']);
-        #Deriva a tentativa atual, caso erro retorna a mensagem
-        $derivacaofinal=$this->constr->aplicarRegra($derivacao,$formulario['linha1'],$formulario['linha2'],$formulario['regra']);
+
+        #--------------------------------------------------------
+        
+
+        #Deriva a tentativa atual, caso erro retorna valor boleano 
+        $derivacaofinal=$this->constr->aplicarRegra($derivacaoPasso,$formulario['linha1'],$formulario['linha2'],$formulario['regra']);
 
 
         if($derivacaofinal==False){
+            $derivacoes=$this->constr->gerar($derivacaoPasso,$premissas);
             $formula=$this->arg->formula($premissas,$conclusao);
             $listaFormulas=$this->constr->stringXmlDiretorio();
             $listaDerivacoes =json_encode ($listaDerivacoes);

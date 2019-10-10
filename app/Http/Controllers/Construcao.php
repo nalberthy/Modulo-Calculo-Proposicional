@@ -38,12 +38,13 @@ class Construcao extends Controller
             if (in_array($i->getPremissa(), $premissas, true)){
                 $i->setIdentificacao('p');
             }
-
             $derivacoes[]= ['indice'=>$indice,'str'=>$this->arg->stringArg($i->getPremissa()->getValor_obj()),'ident'=>$i->getIdentificacao()];
             $indice+=1;
         }
+        
         return $derivacoes;
     }   
+
     public function aplicarRegra($derivacoes,$linha1,$linha2,$regra){
         $linha1=$linha1-1;
         $linha2=$linha2-1;
@@ -57,6 +58,7 @@ class Construcao extends Controller
         // PC
         // Raa
         // print_r($derivacoes[$linha1]->getPremissa()->getValor_obj()->getTipo());
+        
         if ($regra == 'Modus_Ponens'){
             if ($derivacoes[$linha1]->getPremissa()->getValor_obj()->getTipo()=="CONDICIONAL"){
                 if($derivacoes[$linha1]->getPremissa()->getValor_obj()->getEsquerdaValor()==$derivacoes[$linha2]->getPremissa()->getValor_obj()->getValor()){
@@ -67,6 +69,7 @@ class Construcao extends Controller
                    
                 }
             }
+        
             elseif ($derivacoes[$linha2]->getPremissa()->getValor_obj()->getTipo()=="CONDICIONAL"){
                 if($derivacoes[$linha2]->getPremissa()->getValor_obj()->getEsquerdaValor()==$derivacoes[$linha1]->getPremissa()->getValor_obj()->getValor()){
                     $aplicado=$this->reg->ModusPonens($derivacoes,$derivacoes[$linha1],$derivacoes[$linha2]); 
@@ -82,8 +85,11 @@ class Construcao extends Controller
 
         }
         elseif($regra=='Introducao_Disjuncao'){
+            $aplicado=$this->reg->IntroducaoDisjuncao($derivacoes,$derivacoes[$linha1],$derivacoes[$linha2]);
             
-            
+            $aplicado->setIdentificacao(($linha1+1).','.($linha2+1).' vI');
+            array_push($derivacoes,$aplicado);
+            return $derivacoes;
         }
         elseif($regra=='Eliminacao_Disjuncao'){
             
@@ -104,5 +110,15 @@ class Construcao extends Controller
             
         }
     }
-    
+    public function gerarPasso($derivacao,$passo){
+        if($passo!=[]){
+            foreach ($passo as $i) {
+                return $this->aplicarRegra($derivacao,$i['linha1'],$i['linha2'],$i['regra']);
+            }
+        }
+        else{
+            return $derivacao;
+        }
+        
+    }   
 }

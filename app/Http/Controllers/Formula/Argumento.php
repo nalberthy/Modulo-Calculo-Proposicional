@@ -216,7 +216,7 @@ class Argumento extends Controller
         $valor = $predicado1->getValor()."^". $predicado2->getValor();
         return new Predicado($valor,0,'CONJUNCAO',$predicado1,$predicado2);
     }
-    public function newdisjuncao($predicado1,$predicado2){
+    public function criardisjuncao($predicado1,$predicado2){
         $valor = $predicado1->getValor()."v". $predicado2->getValor();
         return new Predicado ($valor,0,'DISJUNCAO',$predicado1,$predicado2);
     }
