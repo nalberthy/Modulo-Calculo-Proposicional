@@ -60,13 +60,29 @@ class Construcao extends Controller
         if ($regra == 'Modus_Ponens'){
             if ($derivacoes[$linha1]->getPremissa()->getValor_obj()->getTipo()=="CONDICIONAL"){
                 if($derivacoes[$linha1]->getPremissa()->getValor_obj()->getEsquerdaValor()==$derivacoes[$linha2]->getPremissa()->getValor_obj()->getValor()){
-                   array_push($derivacoes,$this->reg->ModusPonens($derivacoes,$derivacoes[$linha1],$derivacoes[$linha2])); 
-                
+                    $aplicado= $this->reg->ModusPonens($derivacoes,$derivacoes[$linha1],$derivacoes[$linha2]);
+                    $aplicado->setIdentificacao(($linha1+1).','.($linha2+1).' mp');
+                    array_push($derivacoes,$aplicado);
+                    return $derivacoes;
+                   
                 }
+            }
+            elseif ($derivacoes[$linha2]->getPremissa()->getValor_obj()->getTipo()=="CONDICIONAL"){
+                if($derivacoes[$linha2]->getPremissa()->getValor_obj()->getEsquerdaValor()==$derivacoes[$linha1]->getPremissa()->getValor_obj()->getValor()){
+                    $aplicado=$this->reg->ModusPonens($derivacoes,$derivacoes[$linha1],$derivacoes[$linha2]); 
+                    $aplicado->setIdentificacao(($linha2+1).','.($linha1+1).' mp');
+                    array_push($derivacoes,$aplicado);
+                    return $derivacoes;
+                }
+
+            }
+            else{
+                return False;
             }
 
         }
         elseif($regra=='Introducao_Disjuncao'){
+            
             
         }
         elseif($regra=='Eliminacao_Disjuncao'){
@@ -87,8 +103,6 @@ class Construcao extends Controller
         elseif($regra=='PC'){
             
         }
-
-    
     }
     
 }

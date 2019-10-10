@@ -18,19 +18,19 @@ class Index extends Controller
 
     public function Index(){
         $listaFormulas=$this->constr->stringXmlDiretorio();
-        return view('index',['listaFormulas'=> $listaFormulas, 'formulaGerada'=> 'Nenhuma Fórmula Carregada...' , 'idxml'=>'','listaDerivacoes'=>'']);
+        return view('index',['listaFormulas'=> $listaFormulas, 'formulaGerada'=> 'Nenhuma Fórmula Carregada...' , 'idXml'=>'','listaDerivacoes'=>'']);
 
         }
 
 
     public function SalvarXml(Request $request){
-
+        
         if ($request->hasFile('arquivo') && $request->file('arquivo')->isValid()){
-
-            $diretorio = scandir('C:\xampp\htdocs\calculoproposicional\storage\app\public\formulas');
+            $dir=dirname(__FILE__,4.).'\storage\app\public\formulas';
+            $diretorio = scandir($dir);
             $num = count($diretorio) - 1;
             $request->file('arquivo')->storeAs('formulas', 'formula-'.$num.'.xml');
-            return view('index');
+            return $this->Index();
         }
     }
 
@@ -48,7 +48,7 @@ class Index extends Controller
         
         #etapas usuario
         
-        $listaDericacoes = '{}';
+        $listaDerivacoes = '{}';
 
         #gera formula para exibição
         $formula=$this->arg->formula($premissas,$conclusao);
@@ -58,7 +58,7 @@ class Index extends Controller
         $listaFormulas=$this->constr->stringXmlDiretorio();
 
 
-        return view('derivacao',['derivacoes'=>$derivacoes,'listaFormulas'=> $listaFormulas, 'formula'=>$formula, 'idxml'=>$id, 'listaDerivacoes'=>$listaDericacoes ]);
+        return view('derivacao',['derivacoes'=>$derivacoes,'listaFormulas'=> $listaFormulas, 'formula'=>$formula, 'idXml'=>$id, 'listaDerivacoes'=>$listaDerivacoes ]);
         
     }
 
@@ -66,6 +66,8 @@ class Index extends Controller
 
 
     public function Derivar(Request $request){
+        $id = $request->all()['idXml'];
+
         $formulario = $request->all();
         $dir=dirname(__FILE__,4.).'\storage\app\public\formulas';
         $xml = simplexml_load_file($dir.'\formula-'.$formulario['idXml'].'.xml');
@@ -92,7 +94,21 @@ class Index extends Controller
         $derivacaofinal=$this->constr->aplicarRegra($derivacao,$formulario['linha1'],$formulario['linha2'],$formulario['regra']);
 
 
-    }
+        if($derivacaofinal==False){
+            $formula=$this->arg->formula($premissas,$conclusao);
+            $listaFormulas=$this->constr->stringXmlDiretorio();
+            $listaDerivacoes =json_encode ($listaDerivacoes);
+        }
+        else{
+            $derivacoes=$this->constr->gerar($derivacaofinal,$premissas);
+            $formula=$this->arg->formula($premissas,$conclusao);
+            $listaFormulas=$this->constr->stringXmlDiretorio();
+            array_push( $listaDerivacoes, ['linha1'=>$formulario['linha1'],'linha2'=>$formulario['linha2'],'regra'=>$formulario['regra']]);
+            $listaDerivacoes =json_encode ($listaDerivacoes);
+            }
+            return view('derivacao',['derivacoes'=>$derivacoes,'listaFormulas'=> $listaFormulas, 'formula'=>$formula, 'idXml'=>$id, 'listaDerivacoes'=> $listaDerivacoes]);
+           
+        }
 
 
 }

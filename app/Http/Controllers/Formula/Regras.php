@@ -20,10 +20,17 @@ class Regras extends Controller
         if($newpremissa1->getTipo()=="CONDICIONAL"){
             if($newpremissa1->getEsquerdaValor()==$newpremissa2->getValor()){
                 if($newpremissa2->getNegado()==$newpremissa1->getEsquerda()->getNegado()){
-                    array_push($derivacao,$this->arg->derivacao($this->arg->criarPremissa($newpremissa1->getDireita())));
+                    return $this->arg->derivacao($this->arg->criarPremissa($newpremissa1->getDireita()));
                 }
             }
         }
-        return $derivacao;
+        elseif($newpremissa2->getTipo()=="CONDICIONAL"){
+            if($newpremissa2->getEsquerdaValor()==$newpremissa1->getValor()){
+                if($newpremissa1->getNegado()==$newpremissa2->getEsquerda()->getNegado()){
+                    return $this->arg->derivacao($this->arg->criarPremissa($newpremissa2->getDireita()));
+                }
+            }
+        }
+        
     }
 }
