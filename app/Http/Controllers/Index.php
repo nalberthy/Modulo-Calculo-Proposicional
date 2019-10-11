@@ -18,7 +18,7 @@ class Index extends Controller
 
     public function Index(){
         $listaFormulas=$this->constr->stringXmlDiretorio();
-        return view('index',['listaFormulas'=> $listaFormulas, 'formulaGerada'=> 'Nenhuma Fórmula Carregada...' , 'idXml'=>'','listaDerivacoes'=>'']);
+        return view('index',['listaFormulas'=> $listaFormulas, 'formulaGerada'=> 'Nenhuma Fórmula Carregada...' , 'idXml'=>'','listaDerivacoes'=>'','msg'=>'']);
 
         }
 
@@ -58,7 +58,7 @@ class Index extends Controller
         $listaFormulas=$this->constr->stringXmlDiretorio();
 
 
-        return view('derivacao',['derivacoes'=>$derivacoes,'listaFormulas'=> $listaFormulas, 'formula'=>$formula, 'idXml'=>$id, 'listaDerivacoes'=>$listaDerivacoes ]);
+        return view('derivacao',['derivacoes'=>$derivacoes,'listaFormulas'=> $listaFormulas, 'formula'=>$formula, 'idXml'=>$id, 'listaDerivacoes'=>$listaDerivacoes, 'msg'=>'' ]);
         
     }
 
@@ -72,6 +72,9 @@ class Index extends Controller
         $dir=dirname(__FILE__,4.).'\storage\app\public\formulas';
         $xml = simplexml_load_file($dir.'\formula-'.$formulario['idXml'].'.xml');
         
+        #--------------Mensagem----------------------
+        $msg='';
+
         #arrays 
         $premissas = $this->arg->arrayPremissas($xml);
         $conclusao = $this->arg->arrayConclusao($xml);
@@ -90,16 +93,20 @@ class Index extends Controller
         #--------------------------------------------------------
         #-------- Reconstró passo a passo -----------------------
         $derivacaoPasso= $this->constr->gerarPasso($derivacao,$listaDerivacoes);
-        
-        
         #--------------------------------------------------------
         
 
-        #Deriva a tentativa atual, caso erro retorna valor boleano 
+        #Deriva a tentativa atual, caso der erro, retorna valor boleano 
         $derivacaofinal=$this->constr->aplicarRegra($derivacaoPasso,$formulario['linha1'],$formulario['linha2'],$formulario['regra']);
+        if ($derivacaofinal != FALSE){
+            if($this->constr->verificaConclusao($conclusao,$derivacaofinal)==TRUE){
+                $msg='Chegou a conclusão';
+            }
+        }
 
-
+        
         if($derivacaofinal==False){
+            $msg='Não foi Possivel Aplicar Regra!';
             $derivacoes=$this->constr->gerar($derivacaoPasso,$premissas);
             $formula=$this->arg->formula($premissas,$conclusao);
             $listaFormulas=$this->constr->stringXmlDiretorio();
@@ -113,7 +120,7 @@ class Index extends Controller
             $listaDerivacoes =json_encode ($listaDerivacoes);
         }
     
-        return view('derivacao',['derivacoes'=>$derivacoes,'listaFormulas'=> $listaFormulas, 'formula'=>$formula, 'idXml'=>$id, 'listaDerivacoes'=> $listaDerivacoes]);
+        return view('derivacao',['derivacoes'=>$derivacoes,'listaFormulas'=> $listaFormulas, 'formula'=>$formula, 'idXml'=>$id, 'listaDerivacoes'=> $listaDerivacoes,'msg'=>$msg]);
            
     }
 

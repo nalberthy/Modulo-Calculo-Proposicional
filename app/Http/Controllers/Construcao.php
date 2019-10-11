@@ -48,17 +48,7 @@ class Construcao extends Controller
     public function aplicarRegra($derivacoes,$linha1,$linha2,$regra){
         $linha1=$linha1-1;
         $linha2=$linha2-1;
-        // Modus_Ponens
-        // Introducao_Disjuncao
-        // Eliminacao_Disjuncao
-        // Introducao_Conjucao
-        // Eliminacao_Negacao
-        // Introducao_Bicondicional
-        // Eliminacao_Bicondicional
-        // PC
-        // Raa
-        // print_r($derivacoes[$linha1]->getPremissa()->getValor_obj()->getTipo());
-        
+
         if ($regra == 'Modus_Ponens'){
             if ($derivacoes[$linha1]->getPremissa()->getValor_obj()->getTipo()=="CONDICIONAL"){
                 if($derivacoes[$linha1]->getPremissa()->getValor_obj()->getEsquerdaValor()==$derivacoes[$linha2]->getPremissa()->getValor_obj()->getValor()){
@@ -111,11 +101,14 @@ class Construcao extends Controller
             return $derivacoes;
         }
         elseif($regra=='Introducao_Bicondicional'){
-            $aplicado=$this->reg->IntroducaoBicondicional($derivacoes,$derivacoes[$linha1],$derivacoes[$linha2]);
+            if($derivacoes[$linha1]->getPremissa()->getValor_obj()->getTipo()=='CONDICIONAL' and $derivacoes[$linha2]->getPremissa()->getValor_obj()->getTipo()=='CONDICIONAL'){
+                $aplicado=$this->reg->IntroducaoBicondicional($derivacoes,$derivacoes[$linha1],$derivacoes[$linha2]);
 
-            $aplicado->setIdentificacao(($linha1+1).','.($linha2+1).' ↔I');
-            array_push($derivacoes,$aplicado);
-            return $derivacoes;
+                $aplicado->setIdentificacao(($linha1+1).','.($linha2+1).' ↔I');
+                array_push($derivacoes,$aplicado);
+                return $derivacoes;
+            }
+            return FALSE;
             
         }
         elseif($regra=='Eliminacao_Bicondicional'){
@@ -123,12 +116,15 @@ class Construcao extends Controller
             return $derivacoes;
         }
         elseif($regra=='PC'){
-            
+             // Disponibilizado em breve
         }
+        elseif($regra=='Raa'){
+            // Disponibilizado em breve
+       }
     }
-    public function gerarPasso($derivacao,$passo){
-        
 
+    #reconstrói objeto a partir de array com regras aplicadas anteriormente 
+    public function gerarPasso($derivacao,$passo){
         if($passo!=[]){
             foreach ($passo as $i) {
                 $derivacao= $this->aplicarRegra($derivacao,$i['linha1'],$i['linha2'],$i['regra']);
@@ -143,8 +139,13 @@ class Construcao extends Controller
     
 
     public function verificaConclusao($conclusao,$derivacao){
-        
 
+        foreach ($derivacao as $i){
+            if($this->arg->stringArg($conclusao[0]->getValor_obj())==$this->arg->stringArg($i->getPremissa()->getValor_obj())){
+                return TRUE;
+            }
+        }
+        
     }
     
 }
