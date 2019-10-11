@@ -220,11 +220,11 @@ class Argumento extends Controller
         $valor = $predicado1->getValor()."v". $predicado2->getValor();
         return new Predicado ($valor,0,'DISJUNCAO',$predicado1,$predicado2);
     }
-    public function newbicondicional($predicado1,$predicado2){
+    public function criarbicondicional($predicado1,$predicado2){
         $valor = $predicado1->getValor()."↔". $predicado2->getValor();
         return new Predicado ($valor,0,'BICONDICIONAL',$predicado1,$predicado2);
     }
-    public function newcondicional($predicado1,$predicado2){
+    public function criarcondicional($predicado1,$predicado2){
         $valor = $predicado1->getValor()."→". $predicado2->getValor();
         return new Predicado ($valor,0,'CONDICIONAL',$predicado1,$predicado2);
     }

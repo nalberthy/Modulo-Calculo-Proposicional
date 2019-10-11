@@ -111,10 +111,16 @@ class Construcao extends Controller
             return $derivacoes;
         }
         elseif($regra=='Introducao_Bicondicional'){
+            $aplicado=$this->reg->IntroducaoBicondicional($derivacoes,$derivacoes[$linha1],$derivacoes[$linha2]);
+
+            $aplicado->setIdentificacao(($linha1+1).','.($linha2+1).' ↔I');
+            array_push($derivacoes,$aplicado);
+            return $derivacoes;
             
         }
         elseif($regra=='Eliminacao_Bicondicional'){
-            
+            $derivacoes= $this->reg->EliminacaoBicondicional($derivacoes,$derivacoes[$linha1],$linha1);
+            return $derivacoes;
         }
         elseif($regra=='PC'){
             

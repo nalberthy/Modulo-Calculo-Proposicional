@@ -40,14 +40,14 @@ class Regras extends Controller
         return $this->arg->derivacao($this->arg->criarpremissa($this->arg->criardisjuncao($newpremissa1,$newpremissa2)));
     }
 
-    function IntroducaoConjuncao($derivacao,$premissa1,$premissa2){
+    public function IntroducaoConjuncao($derivacao,$premissa1,$premissa2){
         $newpremissa1 = clone $premissa1->getPremissa()->getValor_obj();
         $newpremissa2 = clone $premissa2->getPremissa()->getValor_obj();
         
         return $this->arg->derivacao($this->arg->criarpremissa($this->arg->criarconjuncao($newpremissa1,$newpremissa2)));
     }
 
-    function EliminacaoConjuncao($derivacao,$premissa,$linha){
+    public function EliminacaoConjuncao($derivacao,$premissa,$linha){
         $newpremissa= clone $premissa->getPremissa()->getValor_obj();
         $newpremissa1= $this->arg->derivacao($this->arg->criarpremissa($newpremissa->getEsquerda()));
         $newpremissa1->setIdentificacao(($linha+1).' ^E');
@@ -60,7 +60,7 @@ class Regras extends Controller
         return $derivacao;
     }
 
-    function ElimicacaoNegacao($derivacao,$premissa,$linha){
+    public function ElimicacaoNegacao($derivacao,$premissa,$linha){
         $newpredicado = clone $premissa->getPremissa()->getValor_obj();
         if ($newpredicado->getNegado() >= 2){
             $newpredicado->eliminacaoNegacao();
@@ -71,8 +71,39 @@ class Regras extends Controller
         array_push($derivacao,$newpredicado);
 
         return $derivacao;
+    }
+
+    public function IntroducaoBicondicional($derivacao,$premissa1,$premissa2){
+        $newpremissa1 = clone $premissa1->getPremissa()->getValor_obj();
+        $newpremissa2 = clone $premissa2->getPremissa()->getValor_obj();
+  
+        if($newpremissa1->getEsquerda()->getValor()==$newpremissa2->getDireita()->getValor()){
+            if($newpremissa1->getEsquerda()->getNegado()==$newpremissa2->getDireita()->getNegado()){
+                if($newpremissa1->getDireita()->getValor()==$newpremissa2->getEsquerda()->getValor()){
+                    if($newpremissa1->getDireita()->getNegado()==$newpremissa2->getEsquerda()->getNegado()){
+                        return $this->arg->derivacao($this->arg->criarpremissa($this->arg->criarbicondicional($newpremissa1->getEsquerda(),$newpremissa2->getEsquerda())));
+                    }
+                }
+            }  
+        }
+    }
+
+        
+    public function EliminacaoBicondicional($derivacao,$premissa,$linha){
+        $esquerda = clone $premissa->getPremissa()->getValor_obj()->getEsquerda();
+        $direita = clone $premissa->getPremissa()->getValor_obj()->getDireita();
+        $newpremissa1=$this->arg->derivacao($this->arg->criarpremissa($this->arg->criarcondicional($direita,$esquerda)));
+        $newpremissa2=$this->arg->derivacao($this->arg->criarpremissa($this->arg->criarcondicional($esquerda,$direita)));
+
+        $newpremissa1->setIdentificacao(($linha+1).' ↔E');
+        $newpremissa2->setIdentificacao(($linha+1).' ↔E');
+        array_push($derivacao,$newpremissa1);
+        array_push($derivacao,$newpremissa2);
+        return $derivacao;
 
     }
+
+
 
 
 }
