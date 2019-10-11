@@ -53,8 +53,8 @@
                         {{ csrf_field() }}
                         
                         <div class="row">
-                                <input type="text" class="form-control" name='idXml' value={{$idXml}} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                                <input type="text"  name='derivacoes' value={{$listaDerivacoes}} class="form-control">
+                                <input type="hidden" class="form-control" name='idXml' value={{$idXml}} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                <input type="hidden"  name='derivacoes' value={{$listaDerivacoes}} class="form-control">
                             <div class="col-6">
                                 <div class="input-group input-group-sm mb-3">
                                     <div class="input-group-prepend">

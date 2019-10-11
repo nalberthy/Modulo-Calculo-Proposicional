@@ -139,5 +139,12 @@ class Construcao extends Controller
             return $derivacao;
         }
         
-    }   
+    }  
+    
+
+    public function verificaConclusao($conclusao,$derivacao){
+        
+
+    }
+    
 }

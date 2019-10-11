@@ -48,29 +48,33 @@ class Regras extends Controller
     }
 
     public function EliminacaoConjuncao($derivacao,$premissa,$linha){
-        $newpremissa= clone $premissa->getPremissa()->getValor_obj();
-        $newpremissa1= $this->arg->derivacao($this->arg->criarpremissa($newpremissa->getEsquerda()));
-        $newpremissa1->setIdentificacao(($linha+1).' ^E');
-
-        $newpremissa2=$this->arg->derivacao($this->arg->criarpremissa($newpremissa->getDireita()));
-        $newpremissa2->setIdentificacao(($linha+1).' ^E');
-
-        array_push($derivacao,$newpremissa1);
-        array_push($derivacao,$newpremissa2);
-        return $derivacao;
+        if($premissa->getPremissa()->getValor_obj()->getTipo()== 'CONJUNCAO'){
+            $newpremissa= clone $premissa->getPremissa()->getValor_obj();
+            $newpremissa1= $this->arg->derivacao($this->arg->criarpremissa($newpremissa->getEsquerda()));
+            $newpremissa1->setIdentificacao(($linha+1).' ^E');
+    
+            $newpremissa2=$this->arg->derivacao($this->arg->criarpremissa($newpremissa->getDireita()));
+            $newpremissa2->setIdentificacao(($linha+1).' ^E');
+    
+            array_push($derivacao,$newpremissa1);
+            array_push($derivacao,$newpremissa2);
+            return $derivacao;
+        }
+        return FALSE;
     }
 
     public function ElimicacaoNegacao($derivacao,$premissa,$linha){
         $newpredicado = clone $premissa->getPremissa()->getValor_obj();
         if ($newpredicado->getNegado() >= 2){
             $newpredicado->eliminacaoNegacao();
+            $newpredicado=$this->arg->derivacao($this->arg->criarpremissa($newpredicado));
+            $newpredicado->setIdentificacao(($linha+1).' ~E');
+            
+            array_push($derivacao,$newpredicado);
+    
+            return $derivacao;
         }
-        $newpredicado=$this->arg->derivacao($this->arg->criarpremissa($newpredicado));
-        $newpredicado->setIdentificacao(($linha+1).' ~E');
-        
-        array_push($derivacao,$newpredicado);
-
-        return $derivacao;
+        return FALSE;
     }
 
     public function IntroducaoBicondicional($derivacao,$premissa1,$premissa2){
@@ -86,20 +90,25 @@ class Regras extends Controller
                 }
             }  
         }
+        return FALSE;
     }
 
         
     public function EliminacaoBicondicional($derivacao,$premissa,$linha){
-        $esquerda = clone $premissa->getPremissa()->getValor_obj()->getEsquerda();
-        $direita = clone $premissa->getPremissa()->getValor_obj()->getDireita();
-        $newpremissa1=$this->arg->derivacao($this->arg->criarpremissa($this->arg->criarcondicional($direita,$esquerda)));
-        $newpremissa2=$this->arg->derivacao($this->arg->criarpremissa($this->arg->criarcondicional($esquerda,$direita)));
+        if($premissa->getPremissa()->getValor_obj()->getTipo()=='BICONDICIONAL'){
+            $esquerda = clone $premissa->getPremissa()->getValor_obj()->getEsquerda();
+            $direita = clone $premissa->getPremissa()->getValor_obj()->getDireita();
+            $newpremissa1=$this->arg->derivacao($this->arg->criarpremissa($this->arg->criarcondicional($direita,$esquerda)));
+            $newpremissa2=$this->arg->derivacao($this->arg->criarpremissa($this->arg->criarcondicional($esquerda,$direita)));
+    
+            $newpremissa1->setIdentificacao(($linha+1).' ↔E');
+            $newpremissa2->setIdentificacao(($linha+1).' ↔E');
+            array_push($derivacao,$newpremissa1);
+            array_push($derivacao,$newpremissa2);
+            return $derivacao;
+        }
+        return FALSE;
 
-        $newpremissa1->setIdentificacao(($linha+1).' ↔E');
-        $newpremissa2->setIdentificacao(($linha+1).' ↔E');
-        array_push($derivacao,$newpremissa1);
-        array_push($derivacao,$newpremissa2);
-        return $derivacao;
 
     }
 
