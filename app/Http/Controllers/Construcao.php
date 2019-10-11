@@ -92,13 +92,23 @@ class Construcao extends Controller
             return $derivacoes;
         }
         elseif($regra=='Eliminacao_Disjuncao'){
-            
+            // Disponibilizado em breve
         }
-        elseif($regra=='Introducao_Conjucao'){
-            
+        elseif($regra=='Introducao_Conjuncao'){
+            $aplicado=$this->reg->IntroducaoConjuncao($derivacoes,$derivacoes[$linha1],$derivacoes[$linha2]);
+            $aplicado->setIdentificacao(($linha1+1).','.($linha2+1).' ^I');
+
+            array_push($derivacoes,$aplicado);
+            return $derivacoes;
+        }
+
+        elseif($regra=='Eliminacao_Conjuncao'){
+            $derivacoes= $this->reg->EliminacaoConjuncao($derivacoes,$derivacoes[$linha1],$linha1);
+            return $derivacoes;
         }
         elseif($regra=='Eliminacao_Negacao'){
-            
+            $derivacoes=$this->reg->ElimicacaoNegacao($derivacoes,$derivacoes[$linha1],$linha1);
+            return $derivacoes;
         }
         elseif($regra=='Introducao_Bicondicional'){
             
@@ -111,10 +121,13 @@ class Construcao extends Controller
         }
     }
     public function gerarPasso($derivacao,$passo){
+        
+
         if($passo!=[]){
             foreach ($passo as $i) {
-                return $this->aplicarRegra($derivacao,$i['linha1'],$i['linha2'],$i['regra']);
+                $derivacao= $this->aplicarRegra($derivacao,$i['linha1'],$i['linha2'],$i['regra']);
             }
+            return $derivacao;
         }
         else{
             return $derivacao;

@@ -91,7 +91,7 @@ class Index extends Controller
         #-------- Reconstró passo a passo -----------------------
         $derivacaoPasso= $this->constr->gerarPasso($derivacao,$listaDerivacoes);
         
-
+        
         #--------------------------------------------------------
         
 
@@ -111,10 +111,11 @@ class Index extends Controller
             $listaFormulas=$this->constr->stringXmlDiretorio();
             array_push( $listaDerivacoes, ['linha1'=>$formulario['linha1'],'linha2'=>$formulario['linha2'],'regra'=>$formulario['regra']]);
             $listaDerivacoes =json_encode ($listaDerivacoes);
-            }
-            return view('derivacao',['derivacoes'=>$derivacoes,'listaFormulas'=> $listaFormulas, 'formula'=>$formula, 'idXml'=>$id, 'listaDerivacoes'=> $listaDerivacoes]);
-           
         }
+    
+        return view('derivacao',['derivacoes'=>$derivacoes,'listaFormulas'=> $listaFormulas, 'formula'=>$formula, 'idXml'=>$id, 'listaDerivacoes'=> $listaDerivacoes]);
+           
+    }
 
 
 }

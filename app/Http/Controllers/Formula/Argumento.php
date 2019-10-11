@@ -212,7 +212,7 @@ class Argumento extends Controller
     public function criarpremissa($predicado){
         return new Premissa($predicado->getValor(), $predicado);
     }
-    public function newconjuncao($predicado1,$predicado2){
+    public function criarconjuncao($predicado1,$predicado2){
         $valor = $predicado1->getValor()."^". $predicado2->getValor();
         return new Predicado($valor,0,'CONJUNCAO',$predicado1,$predicado2);
     }

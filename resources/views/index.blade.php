@@ -83,15 +83,15 @@
                                     <label class="custom-control-label" for="id1">Introdução da Disjunção</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="ed1" value='Eliminacao_Disjuncao' name="regra" class="custom-control-input">
+                                    <input type="radio" id="ed1" value='Eliminacao_Disjuncao' name="regra" class="custom-control-input" disabled>
                                     <label class="custom-control-label" for="ed1">Eliminação da Disjunção</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="ic1" value= 'Introducao_Conjucao' name="regra" class="custom-control-input">
+                                    <input type="radio" id="ic1" value= 'Introducao_Conjuncao' name="regra" class="custom-control-input">
                                     <label class="custom-control-label" for="ic1">Introdução da Conjunção</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="ec1" value='Eliminacao_Conjucao' name="regra" class="custom-control-input">
+                                    <input type="radio" id="ec1" value='Eliminacao_Conjuncao' name="regra" class="custom-control-input">
                                     <label class="custom-control-label" for="ec1">Eliminação da Conjunção</label>
                                 </div>
                             </div>
@@ -109,11 +109,11 @@
                                     <label class="custom-control-label" for="eb1">Eliminação Bicondicional</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="pc1" value='PC' name="regra" class="custom-control-input">
+                                    <input type="radio" id="pc1" value='PC' name="regra" class="custom-control-input" disabled>
                                     <label class="custom-control-label" for="pc1">Prova do Condicional</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="raa1" value='Raa' name="regra" class="custom-control-input">
+                                    <input type="radio" id="raa1" value='Raa' name="regra" class="custom-control-input" disabled>
                                     <label class="custom-control-label" for="raa1">Redução ao Absurdo</label>
                                 </div>
                             </div>
