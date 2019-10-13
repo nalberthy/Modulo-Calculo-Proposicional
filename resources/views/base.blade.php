@@ -5,7 +5,7 @@
         <title>🎓 The Logic Live - Árvore de refutação</title>
 
         <!-- Argon Theme CSS -->
-        <link rel="stylesheet" type="text/css" href="argon-dashboard\css\argon-dashboard.css">
+        <link rel="stylesheet" type="text/css" href="assets/argon-dashboard\css\argon-dashboard.css">
 
         <!-- Font Awesome -->
         <script src="https://kit.fontawesome.com/f184d99102.js" crossorigin="anonymous"></script>
@@ -21,12 +21,12 @@
         <div>
             @yield('content')
         </div>
-        
+
         <!-- JQUERY 3.4.1 -->
-        <script type="text/javascript" src="assets/plugins/js/jquery.min-3.4.1.js"></script>
+        <script type="text/javascript" src="assets/plugins/jquery.min-3.4.1.js"></script>
         <!-- Argon Theme JS -->
         <script type="text/javascript" src="assets/argon-dashboard/js/argon-dashboard.js"></script>
         <!-- BS Custom File -->
-        <script type="text/javascript" src="assets/plugins/js/bs-custom-file.js"></script>
+        <script type="text/javascript" src="assets/plugins/bs-custom-file.js"></script>
     </body>
 </html>
