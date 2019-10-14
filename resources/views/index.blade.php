@@ -1,53 +1,29 @@
 @extends('base')
 
-
-
 @section('content')
-<!-- Envio arquivo -->
 
-<div  class="content-fluid " style="margin-top: 20px;">
-    <div class="row justify-content-center">
-        <div class="col-6">
-            <div class="card">
-                <div class="card-body">
-                        <form method="post" action="{{URL::to('/submit')}}" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            <div class="input-group mb-3">
-                            <button type="submit" class="btn btn-outline-dark">Enviar</button>
-                                    <div class="custom-file">
-                                    <input type="file" name = "arquivo"  accept=".xml" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                                    <label class="custom-file-label" for="inputGroupFile01">Arquivo XML</label>
-                                </div>
-                            </div>
-                           
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div  class="content-fluid " style="margin-top: 20px;">
-    <div class="row justify-content-center">
-        <div class="col-6">
-            <div class="card">
-                <div class="card-body">
-                    @yield('formula', 'Nenhuma Formula Selecionada')
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-           
-<div  class="content-fluid " style="margin-top: 20px;">
+<div class="container mt-4">
     <div class="row">
         <div class="col-8">
-            <div class="card">
-               <div class="card-body">
+            <!-- Fórmula selecionada -->
+            <div class="card bg-white rounded-top-15">
+                <div class="card-header bg-gradient-blue text-white rounded-top-15 d-flex justify-content-center negrito m-0">
+                        Arquivo XML
+                </div>
+                <div class="card-body">
+                    <div class="row d-flex justify-content-center">
+                        <span>@yield('formula', 'Nenhuma Formula Selecionada')</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Derivação -->
+            <div class="card bg-white">
+                <div class="card-body">
                     @yield('derivacao')
                 </div>
             </div>
-            <div class="card">
+            <!-- Aplicação de regras -->
+            <div class="card bg-white rounded-bottom-15">
                 <div class="card-body">
                     <form method="post" action="{{URL::to('/Derivar')}}">
                         {{ csrf_field() }}
@@ -72,6 +48,7 @@
                                 </div>
                             </div>        
                         </div>
+                        
                         <div class="row">
                             <div class="col-6">
                                 <div class="custom-control custom-radio">
@@ -128,28 +105,51 @@
             </div>
         </div>
         <div class="col-4">
-            <div class="card">
+            <!-- Envio arquivo -->
+            <div class="card bg-white rounded-15">
+                <div class="card-header bg-gradient-blue text-white rounded-top-15 d-flex justify-content-center negrito m-0">
+                        Arquivo XML
+                </div>
+                <div class="card-body pb-0">
+                    <form method="post" action="{{URL::to('/submit')}}" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div class="custom-file mb-2">
+                            <input type="file" class="custom-file-input" name = "arquivo"  accept=".xml" required>
+                            <label class="custom-file-label" for="arquivo">Escolha o arquivo</label>
+                        </div>
+                        <div class="col d-flex justify-content-center mt-2">
+                            <div class="row">
+                                <button type="submit" class="btn shadow bg-gradient-success rounded-05rem">
+                                    <span class="text-white ml-2"><i class="fas fa-cloud-upload-alt text-18"></i></span>
+                                    <span class="text-white ml-2 mr-2">Enviar</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="card bg-white rounded-15">
                 <div class="card-body">
-                        <table class="table table-bordered">
-                                <tbody>
-                                    @foreach($listaFormulas as $formula)
-                                    <tr>
-                                        <th class="text-center align-middle m-0" scope="row">{{$formula['xml']}}</th>
-                                        <td class="text-center align-middle" width="60%">{{$formula['str']}}</td>
-                                        <td class="text-center align-middle m-0 p-0">
-                                            <form method="post" action="{{URL::to('/Derivacao')}}">
-                                                {{ csrf_field() }}
-                                                <input type="hidden" name='idFormula' value={{$formula['xml']}}>
-                                                <button type="submit" class="btn btn-sm shadow bg-gradient-green rounded-05rem">
-                                                    <span class="text-black">Aplicar</span>
-                                                    <span class="text-white ml-2"><i class="fas fa-arrow-right text-18"></i></span>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                    <table class="table table-bordered">
+                        <tbody>
+                            @foreach($listaFormulas as $formula)
+                            <tr>
+                                <th class="text-center align-middle m-0" scope="row">{{$formula['xml']}}</th>
+                                <td class="text-center align-middle" width="60%">{{$formula['str']}}</td>
+                                <td class="text-center align-middle m-0 p-0">
+                                    <form method="post" action="{{URL::to('/Derivacao')}}">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name='idFormula' value={{$formula['xml']}}>
+                                        <button type="submit" class="btn btn-sm shadow bg-gradient-green rounded-05rem">
+                                            <span class="text-black">Aplicar</span>
+                                            <span class="text-white ml-2"><i class="fas fa-arrow-right text-18"></i></span>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
