@@ -18,7 +18,7 @@ class Index extends Controller
 
     public function Index(){
         $listaFormulas=$this->constr->stringXmlDiretorio();
-        return view('index',['listaFormulas'=> $listaFormulas, 'formulaGerada'=> 'Nenhuma Fórmula Carregada...' , 'idXml'=>'','listaDerivacoes'=>'','msg'=>'']);
+        return view('index',['listaFormulas'=> $listaFormulas, 'formula'=> 'Nenhuma Fórmula Carregada...' , 'idXml'=>'','listaDerivacoes'=>'','msg'=>'']);
 
         }
 

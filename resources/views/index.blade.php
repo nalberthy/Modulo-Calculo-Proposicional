@@ -16,6 +16,8 @@
                     </div>
                 </div>
             </div>
+            @if ($formula == 'Nenhuma Fórmula Carregada...')
+            @else
             <!-- Derivação -->
             <div class="card bg-white">
                 <div class="card-body">
@@ -103,6 +105,7 @@
                     </form>
                 </div>
             </div>
+            @endif
         </div>
         <div class="col-4">
             <!-- Envio arquivo -->
