@@ -55,3 +55,27 @@
 .text-15{
     font-size: 15px;
 }
+
+
+/* Badge personalizado */
+.badge{
+    border-radius: 6px;
+    border: 1px dashed #FFFFFF;
+	font-size: 12px !important;
+}
+
+.badge-custom{
+    width: 240px;
+    height: 60px;
+    border-radius: 6px;
+    border: 1px dashed rgba(82, 46, 255, 0.6);
+    font-size: 16px !important;
+}
+
+.bg-pink{
+	background: rgb(255, 0, 230,0.1) !important;
+}
+
+.text-pink{
+    color: rgb(72, 67, 128) !important;
+}

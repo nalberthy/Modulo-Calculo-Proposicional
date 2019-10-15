@@ -2,7 +2,11 @@
 
 
 @section('formula')
-<p class="text-center">{{$formula}}</p>
+<div class="col d-flex justify-content-center">
+    <div class="row badge-custom bg-pink d-flex align-items-center justify-content-center rounded-05rem">
+        <span class="text-pink">{{$formula}}</span>
+    </div>
+</div>
 @endsection
 
 @section('derivacao')
