@@ -36,7 +36,7 @@
                             <div class="col-6">
                                 <div class="input-group input-group-sm mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="valor1">Valor1</span>
+                                        <span class="input-group-text" id="valor1">Linha 1:</span>
                                     </div>
                                     <input type="text" class="form-control" name='linha1' aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                 </div>
@@ -44,7 +44,7 @@
                             <div class="col-6">
                                 <div class="input-group input-group-sm mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="valor2">Valor2</span>
+                                        <span class="input-group-text" id="valor2">Linha 2:</span>
                                     </div>
                                     <input type="text" class="form-control" name='linha2' aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                 </div>
@@ -144,7 +144,7 @@
                                         {{ csrf_field() }}
                                         <input type="hidden" name='idFormula' value={{$formula['xml']}}>
                                         <button type="submit" class="btn btn-sm shadow bg-gradient-success rounded-05rem">
-                                            <span class="text-white">Gerar</span>
+                                            <span class="text-white">Carregar</span>
                                             <span class="text-white ml-2"><i class="fas fa-arrow-right text-18"></i></span>
                                         </button>
                                     </form>
