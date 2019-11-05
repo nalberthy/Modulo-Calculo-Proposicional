@@ -97,9 +97,9 @@
                                 </div>
                             </div>
                             </div>
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center mt-4">
                             <div class="col-4" >
-                                <button type="submit" class="btn btn-outline-dark">Aplicar</button>
+                                <button type="submit" class="btn btn-block bg-gradient-primary text-white">Aplicar</button>
                             </div> 
                         </div>
                     </form>
@@ -133,12 +133,12 @@
             </div>
             <div class="card bg-white rounded-bottom-15">
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered justify-content-center">
                         <tbody>
                             @foreach($listaFormulas as $formula)
                             <tr>
-                                <th class="text-center align-middle m-0">{{$formula['xml']}}</th>
-                                <td class="text-center align-middle">{{$formula['str']}}</td>
+                                <th class="text-center align-middle p-3">{{$formula['xml']}}</th>
+                                <td class="text-center align-middle p-2">{{$formula['str']}}</td>
                                 <td class="text-center align-middle m-0 p-0">
                                     <form class="m-0" method="post" action="{{URL::to('/Derivacao')}}">
                                         {{ csrf_field() }}
