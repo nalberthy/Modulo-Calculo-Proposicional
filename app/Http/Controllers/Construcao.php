@@ -63,6 +63,7 @@ class Construcao extends Controller
 
 
         if ($regra == 'Modus_Ponens'){
+            if ($linha1 == -1){return False;}
             if ($linha2 == -1){return False;}
             if ($derivacoes[$linha1]->getPremissa()->getValor_obj()->getTipo()=="CONDICIONAL"){
                 if($derivacoes[$linha1]->getPremissa()->getValor_obj()->getEsquerdaValor()==$derivacoes[$linha2]->getPremissa()->getValor_obj()->getValor()){
