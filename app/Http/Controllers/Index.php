@@ -100,13 +100,13 @@ class Index extends Controller
         $derivacaofinal=$this->constr->aplicarRegra($derivacaoPasso,$formulario['linha1'],$formulario['linha2'],$formulario['regra']);
         if ($derivacaofinal != FALSE){
             if($this->constr->verificaConclusao($conclusao,$derivacaofinal)==TRUE){
-                $msg='Chegou a conclusão';
+                $msg='True';
             }
         }
 
         
         if($derivacaofinal==False){
-            $msg='Não foi Possivel Aplicar Regra!';
+            $msg='False';
             $derivacoes=$this->constr->gerar($derivacaoPasso,$premissas);
             $formula=$this->arg->formula($premissas,$conclusao);
             $listaFormulas=$this->constr->stringXmlDiretorio();
