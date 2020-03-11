@@ -97,6 +97,9 @@ class Index extends Controller
         
 
         #Deriva a tentativa atual, caso der erro, retorna valor boleano 
+        if($formulario['linha1']){
+
+        }
         $derivacaofinal=$this->constr->aplicarRegra($derivacaoPasso,$formulario['linha1'],$formulario['linha2'],$formulario['regra']);
         if ($derivacaofinal != FALSE){
             if($this->constr->verificaConclusao($conclusao,$derivacaofinal)==TRUE){

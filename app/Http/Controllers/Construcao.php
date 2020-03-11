@@ -48,6 +48,19 @@ class Construcao extends Controller
     public function aplicarRegra($derivacoes,$linha1,$linha2,$regra){
         $linha1=$linha1-1;
         $linha2=$linha2-1;
+        
+// -----------------------------------------VERIFICAÇÃO DE INDICE POR TAMANHO DA LISTA ---------------------------
+        if($linha1>=count($derivacoes)){
+            
+            return False;
+        }
+ 
+        if($linha2 >= count($derivacoes)){
+            
+            return False;
+        }
+// --------------------------------------------------------------------------------------------------------------
+
 
         if ($regra == 'Modus_Ponens'){
             if ($derivacoes[$linha1]->getPremissa()->getValor_obj()->getTipo()=="CONDICIONAL"){
@@ -74,6 +87,7 @@ class Construcao extends Controller
             }
 
         }
+
         elseif($regra=='Introducao_Disjuncao'){
             $aplicado=$this->reg->IntroducaoDisjuncao($derivacoes,$derivacoes[$linha1],$derivacoes[$linha2]);
             
