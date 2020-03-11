@@ -1,0 +1,186 @@
+/* -- CSS GLOBAL -- */
+/* Define cor do corpo do HTML */
+body{
+	background: #F5F5F5
+}
+/* -------------------------------------- */
+/* Cores personalizadas */
+/*.text-blue{*/
+/*	color: #3E78F3;*/
+/*}*/
+
+
+.text-blue{
+    color: rgb(32,178,170);
+}
+
+/*.bg-gradient-blue{*/
+/*	background: linear-gradient(to left, #23a3f7, #1799f8, #1c8ff8, #2c84f6, #3e78f3);*/
+/*}*/
+
+.bg-gradient-blue{
+    background: linear-gradient(to right, rgb(32,178,170), rgb(72, 67, 128));
+}
+
+
+/*.bg-gradient-green{*/
+/*	background: linear-gradient(to right, #3ef39f, #00ebc6, #00e0e4, #00d3f5, #23c4f7);*/
+/*}*/
+.bg-gradient-green{
+   background: radial-gradient(  rgb(32, 140, 132),rgb(32, 127, 119));
+}
+
+.bg-purple {
+    background: #464982;
+}
+
+.bg-pink{
+	background: rgb(255, 0, 230,0.1) !important;
+}
+
+.negrito{
+    font-weight: bold;
+}
+
+/*.text-pink{*/
+/*	color: #FF00EB;;*/
+/*}*/
+
+.text-pink{
+    color: rgb(72, 67, 128);
+}
+
+
+/* Badge personalizado */
+.badge{
+    border-radius: 6px;
+    border: 1px dashed #FFFFFF;
+	font-size: 12px !important;
+}
+
+/* Badge personalizado */
+/*.badge-custom{*/
+/*	width: 240px;*/
+/*	height: 60px;*/
+/*    border-radius: 6px;*/
+/*    border: 1px dashed rgb(255, 0, 230,0.6);*/
+/*	font-size: 16px !important;*/
+/*}*/
+
+.badge-custom{
+    width: 240px;
+    height: 60px;
+    border-radius: 6px;
+    border: 1px dashed rgba(82, 46, 255, 0.6);
+    font-size: 16px !important;
+}
+
+/* Tooltip personalizado */
+/*.tooltip-inner {*/
+/*	max-width: 200px;*/
+/*	padding: 0.25rem 0.5rem;*/
+/*	color: rgb(255, 255, 255);*/
+/*	text-align: center;*/
+/*	border: 1px dashed #FFFFFF;*/
+/*	background-color: rgb(255, 0, 230,0.6) !important;*/
+/*	border-radius: 8px;*/
+/*}*/
+
+.tooltip-inner {
+    max-width: 200px;
+    padding: 0.25rem 0.5rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    border: 1px dashed #FFFFFF;
+    background-color: rgba(82, 46, 255, 0.6) !important;
+    border-radius: 8px;
+}
+  
+/*.bs-tooltip-top .arrow::before, .bs-tooltip-auto[x-placement^="top"] .arrow::before {*/
+/*	border-top-color: rgb(255, 0, 230,0.6);*/
+/*}*/
+
+.bs-tooltip-top .arrow::before, .bs-tooltip-auto[x-placement^="top"] .arrow::before {
+    border-top-color:  rgb(72, 67, 128);
+}
+
+
+
+/* Bordas arredondadas em 25px */
+.rounded-15{
+    border-radius: 15px !important;
+}
+
+.rounded-05rem{
+    border-radius: 0.5rem !important;
+}
+
+/* Bordas superiores arredondadas em 50px */
+.rounded-top-15{
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+}
+
+/* Bordas inferiores arredondadas em 50px */
+.rounded-bottom-50{
+    border-bottom-left-radius: 50px !important;
+    border-bottom-right-radius: 50px !important;
+}
+
+/* CSS BS-Custom-File Plugin */
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+	content: "Pesquisar" !important;
+}
+
+/*.custom-file-label::after {*/
+/*	position: absolute;*/
+/*	top: 0;*/
+/*	right: 0;*/
+/*	bottom: 0;*/
+/*	z-index: 3;*/
+/*	display: block;*/
+/*	height: calc(1.8em + 0.7rem);*/
+/*	padding: 0.375rem 0.75rem;*/
+/*	color: #FF00EB;*/
+/*	background-color:  rgb(255, 0, 230,0.1);*/
+/*	border-left: inherit;*/
+/*	border-radius: 0 0.5rem 0.5rem 0;*/
+/*}*/
+
+.custom-file-label::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: block;
+    height: calc(1.8em + 0.7rem);
+    padding: 0.375rem 0.75rem;
+    color: rgb(72, 67, 128);
+    background-color:  rgb(255, 0, 230,0.1);
+    border-left: inherit;
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/*.custom-file-label {*/
+/*	height: calc(1.8em + 0.8rem);*/
+/*	color: #8F8F8F;*/
+/*	background-color: #FBFBFB;*/
+/*	border: 1px dashed #FF00EB;*/
+/*	border-radius: 0.5rem;*/
+/*}*/
+
+
+.custom-file-label {
+    height: calc(1.8em + 0.8rem);
+    color: #8F8F8F;
+    background-color: #FBFBFB;
+    border: 1px dashed rgba(82, 46, 255, 0.6);
+    border-radius: 0.5rem;
+}
+
+label, .btn:focus,.btn:active {
+	outline: none !important;
+	box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+}

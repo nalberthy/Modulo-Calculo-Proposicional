@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  P |- P ^ P -->
+<!DOCTYPE ARGUMENTO SYSTEM "argumento.dtd">
+<ARGUMENTO>
+	<PREMISSA>
+		<LPRED NEG="">
+			<PREDICATIVO>P</PREDICATIVO>
+		</LPRED>
+	</PREMISSA>
+	<CONCLUSAO>
+		<CONJUNCAO NEG="" CONECTIVO="^">
+			<PRIM>
+				<LPRED NEG="">
+					<PREDICATIVO>P</PREDICATIVO>
+				</LPRED>
+			</PRIM>
+			<SEG>
+				<LPRED NEG="">
+					<PREDICATIVO>P</PREDICATIVO>
+				</LPRED>
+			</SEG>
+		</CONJUNCAO>
+	</CONCLUSAO>
+</ARGUMENTO>
