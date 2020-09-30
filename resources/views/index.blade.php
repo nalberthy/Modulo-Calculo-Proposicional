@@ -113,7 +113,7 @@
                 <div class="card-header bg-gradient-blue text-white rounded-top-15 d-flex justify-content-center negrito m-0">
                         Arquivo XML
                 </div>
-                <div class="card-body pb-0">
+                <div class="card-body">
                     <form method="post" action="{{URL::to('/submit')}}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <div class="custom-file mb-2">
@@ -131,37 +131,38 @@
                     </form>
                 </div>
             </div>
-            <div class="card bg-white rounded-bottom-15">
+            <div class="card shadow-sm bg-white rounded-15 mt-4">
                     <div class="card-header bg-gradient-blue text-white rounded-top-15 d-flex justify-content-center negrito m-0">
                             Lista de Fórmulas
                     </div>
-                <div class="card-body">
-                    <table class="table table-bordered justify-content-center">
-                        <tbody>
-                            @foreach($listaFormulas as $formula)
-                            <tr>
-                                <th class="text-center align-middle p-3">{{$formula['xml']}}</th>
-                                <td class="text-center align-middle p-2">{{$formula['str']}}</td>
-                                <td class="text-center align-middle m-0 p-0">
-                                    <form class="m-0" method="post" action="{{URL::to('/Derivacao')}}">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" name='idFormula' value={{$formula['xml']}}>
-                                        <button type="submit" class="btn btn-sm shadow bg-gradient-success rounded-05rem">
-                                            <span class="text-white">Carregar</span>
-                                            <span class="text-white ml-2"><i class="fas fa-arrow-right text-18"></i></span>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                <div class="p-2">
+                    <div class="overflow-auto" style="height: 300px">
+                        <table class="table table-bordered justify-content-center">
+                            <tbody>
+                                @foreach($listaFormulas as $formula)
+                                <tr>
+                                    <th class="text-center align-middle p-3">{{$formula['xml']}}</th>
+                                    <td class="text-center align-middle p-2">{{$formula['str']}}</td>
+                                    <td class="text-center align-middle m-0 p-0">
+                                        <form class="m-0" method="post" action="{{URL::to('/Derivacao')}}">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name='idFormula' value={{$formula['xml']}}>
+                                            <button type="submit" class="btn btn-sm shadow bg-gradient-success rounded-05rem">
+                                                <span class="text-white">Carregar</span>
+                                                <span class="text-white ml-2"><i class="fas fa-arrow-right text-18"></i></span>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 
 

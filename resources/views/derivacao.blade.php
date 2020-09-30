@@ -24,8 +24,9 @@
                 </div>
             </div>
         </div>
-        {{--        baixar localmente--}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- {{--        baixar localmente--}} -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <script src="assets/plugins/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#meuModal').modal('show');
